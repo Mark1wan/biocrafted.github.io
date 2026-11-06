@@ -4,661 +4,131 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BioCraftEd — Lab &amp; Games</title>
-  <meta name="description" content="BioCraftEd is a London-based bioscientist and game-dev studio. Explore Gene Hunter on the Lab, play studio and jam games, and join the next game jam.">
+  <meta name="description" content="BioCraftEd is a London-based bioscientist and game-dev studio. Portal into the Lab (Gene Hunter) and Games (studio + jams).">
   <link rel="canonical" href="https://biocrafted.xyz/">
   <meta property="og:title" content="BioCraftEd — Lab &amp; Games">
-  <meta property="og:description" content="A portal into BioCraftEd: the browser molecular-biology lab for schools, and BioCraftEd Studios games and game jams.">
+  <meta property="og:description" content="Win98-style portal into lab.biocrafted.xyz and games.biocrafted.xyz.">
   <meta property="og:url" content="https://biocrafted.xyz/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://biocrafted.xyz/BioCraftedEd_files/68247b191ba1dd89a4204896_biocraftedlogo.png">
-  <meta name="twitter:card" content="summary">
   <link rel="icon" href="./BioCraftedEd_files/68247b191ba1dd89a4204896_biocraftedlogo.png" type="image/png">
-  <link rel="apple-touch-icon" href="./BioCraftedEd_files/68247b191ba1dd89a4204896_biocraftedlogo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #07141c;
-      --bg-elev: #0c1f2a;
-      --panel: #102735;
-      --line: rgba(126, 239, 212, 0.18);
-      --line-strong: rgba(126, 239, 212, 0.38);
-      --text: #eaf7f3;
-      --muted: #9fc0b8;
-      --mint: #7eefd4;
-      --sand: #e8c49a;
-      --lab: #2fd18a;
-      --games: #7db7ff;
-      --jam: #ffb45c;
-      --ink: #031018;
-      --radius: 18px;
-      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-      --max: 1120px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      font-family: "DM Sans", system-ui, sans-serif;
-      background:
-        radial-gradient(900px 480px at 12% -10%, rgba(47, 209, 138, 0.18), transparent 60%),
-        radial-gradient(800px 500px at 90% 8%, rgba(125, 183, 255, 0.16), transparent 55%),
-        radial-gradient(700px 420px at 50% 100%, rgba(255, 180, 92, 0.08), transparent 50%),
-        linear-gradient(180deg, #091822 0%, var(--bg) 40%, #050e14 100%);
-      line-height: 1.55;
-    }
-
-    a { color: inherit; }
-    img { max-width: 100%; display: block; }
-    .wrap { width: min(var(--max), calc(100% - 2rem)); margin-inline: auto; }
-
-    .skip {
-      position: absolute;
-      left: -999px;
-      top: 0;
-      background: var(--mint);
-      color: var(--ink);
-      padding: 0.6rem 1rem;
-      z-index: 100;
-    }
-    .skip:focus { left: 1rem; top: 1rem; }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      background: rgba(7, 20, 28, 0.78);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.85rem 0;
-    }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-    .brand img {
-      width: 36px;
-      height: 36px;
-      border-radius: 9px;
-      background: #fff;
-    }
-    .brand span { font-size: 1.05rem; }
-    .brand em {
-      font-style: normal;
-      color: var(--mint);
-      font-weight: 600;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-      padding: 0.45rem 0.75rem;
-      border-radius: 999px;
-    }
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.06);
-      outline: none;
-    }
-    .nav-cta {
-      background: var(--mint) !important;
-      color: var(--ink) !important;
-      font-weight: 700 !important;
-    }
-    .nav-cta:hover,
-    .nav-cta:focus-visible {
-      filter: brightness(1.05);
-    }
-
-    .hero {
-      padding: 3.5rem 0 2.5rem;
-    }
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--mint);
-      margin-bottom: 1rem;
-    }
-    .kicker::before {
-      content: "";
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 50%;
-      background: var(--mint);
-      box-shadow: 0 0 0 4px rgba(126, 239, 212, 0.18);
-    }
-    h1 {
-      margin: 0;
-      max-width: 16ch;
-      font-size: clamp(2.3rem, 5.5vw, 4rem);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      font-weight: 700;
-    }
-    .lede {
-      margin: 1.2rem 0 0;
-      max-width: 42rem;
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: var(--muted);
-    }
-    .lede strong { color: var(--text); font-weight: 600; }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.8rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      text-decoration: none;
-      border-radius: 999px;
-      padding: 0.85rem 1.25rem;
-      font-weight: 700;
-      font-size: 0.98rem;
-      border: 1px solid transparent;
-      transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn:focus-visible {
-      outline: 2px solid var(--mint);
-      outline-offset: 3px;
-    }
-    .btn-lab {
-      background: var(--lab);
-      color: var(--ink);
-    }
-    .btn-games {
-      background: var(--games);
-      color: var(--ink);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border-color: var(--line-strong);
-    }
-    .btn-ghost:hover { background: rgba(255, 255, 255, 0.05); }
-
-    .doors {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      padding: 0.5rem 0 2.5rem;
-    }
-    @media (max-width: 820px) {
-      .doors { grid-template-columns: 1fr; }
-    }
-
-    .door {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: linear-gradient(165deg, rgba(16, 39, 53, 0.95), rgba(8, 22, 30, 0.96));
-      box-shadow: var(--shadow);
-      padding: 1.6rem 1.5rem 1.45rem;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-      transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-    .door:hover,
-    .door:focus-visible {
-      transform: translateY(-2px);
-      outline: none;
-    }
-    .door-lab:hover,
-    .door-lab:focus-visible { border-color: rgba(47, 209, 138, 0.55); }
-    .door-games:hover,
-    .door-games:focus-visible { border-color: rgba(125, 183, 255, 0.55); }
-    .door::after {
-      content: "";
-      position: absolute;
-      inset: auto -20% -40% 20%;
-      height: 180px;
-      border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.35;
-      pointer-events: none;
-    }
-    .door-lab::after { background: var(--lab); }
-    .door-games::after { background: var(--games); }
-
-    .door-tag {
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-    .door-lab .door-tag { color: var(--lab); }
-    .door-games .door-tag { color: var(--games); }
-    .door h2 {
-      margin: 0;
-      font-size: clamp(1.55rem, 3vw, 2rem);
-      letter-spacing: -0.02em;
-    }
-    .door p {
-      margin: 0.85rem 0 1.35rem;
-      color: var(--muted);
-      flex: 1;
-    }
-    .door ul {
-      margin: 0 0 1.35rem;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 0.45rem;
-    }
-    .door li {
-      display: flex;
-      gap: 0.55rem;
-      align-items: flex-start;
-      color: var(--text);
-      font-size: 0.95rem;
-    }
-    .door li::before {
-      content: "▸";
-      color: var(--mint);
-      margin-top: 0.1rem;
-    }
-    .door-go {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-weight: 700;
-      margin-top: auto;
-    }
-    .door-lab .door-go { color: var(--lab); }
-    .door-games .door-go { color: var(--games); }
-
-    section {
-      padding: 1.25rem 0 2.75rem;
-    }
-    .section-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: end;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1.1rem;
-    }
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
-      letter-spacing: -0.02em;
-    }
-    .section-head p {
-      margin: 0.35rem 0 0;
-      color: var(--muted);
-      max-width: 40rem;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-    @media (max-width: 900px) {
-      .cards { grid-template-columns: 1fr; }
-    }
-    .card {
-      border: 1px solid var(--line);
-      background: rgba(16, 39, 53, 0.72);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.2rem;
-    }
-    .card h3 {
-      margin: 0 0 0.55rem;
-      font-size: 1.1rem;
-    }
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-    .card a {
-      color: var(--mint);
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .card a:hover { text-decoration: underline; }
-
-    .jam {
-      border: 1px solid rgba(255, 180, 92, 0.35);
-      background:
-        linear-gradient(135deg, rgba(255, 180, 92, 0.12), transparent 45%),
-        rgba(16, 39, 53, 0.85);
-      border-radius: calc(var(--radius) + 4px);
-      padding: 1.5rem;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 1.25rem;
-      align-items: center;
-    }
-    @media (max-width: 820px) {
-      .jam { grid-template-columns: 1fr; }
-    }
-    .jam-tag {
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--jam);
-      margin-bottom: 0.55rem;
-    }
-    .jam h2 {
-      margin: 0;
-      font-size: clamp(1.35rem, 3vw, 1.8rem);
-    }
-    .jam p {
-      margin: 0.7rem 0 0;
-      color: var(--muted);
-    }
-    .jam-meta {
-      display: grid;
-      gap: 0.55rem;
-      padding: 1rem;
-      border-radius: 14px;
-      background: rgba(0, 0, 0, 0.22);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 0.95rem;
-    }
-    .jam-meta strong { color: var(--sand); font-weight: 600; }
-
-    .about {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 1rem;
-    }
-    @media (max-width: 820px) {
-      .about { grid-template-columns: 1fr; }
-    }
-    .panel {
-      border: 1px solid var(--line);
-      background: rgba(12, 31, 42, 0.9);
-      border-radius: var(--radius);
-      padding: 1.4rem 1.3rem;
-    }
-    .panel h2 {
-      margin: 0 0 0.7rem;
-      font-size: 1.35rem;
-    }
-    .panel p { margin: 0 0 0.85rem; color: var(--muted); }
-    .panel p:last-child { margin-bottom: 0; }
-    .contact-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.7rem;
-    }
-    .contact-list a {
-      color: var(--mint);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .contact-list a:hover { text-decoration: underline; }
-    .contact-list span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 0.15rem;
-    }
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 1.6rem 0 2.2rem;
-      margin-top: 1rem;
-    }
-    .foot {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: space-between;
-      align-items: start;
-    }
-    .foot p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-      max-width: 36rem;
-    }
-    .socials {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-    }
-    .socials a {
-      text-decoration: none;
-      color: var(--text);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.4rem 0.75rem;
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-    .socials a:hover {
-      border-color: var(--line-strong);
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .legal {
-      margin-top: 1.1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    .legal a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .legal a:hover { color: var(--text); }
-  </style>
+  <link rel="stylesheet" href="./assets/portal.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <div class="sky" aria-hidden="true"></div>
+  <canvas id="reefbg" data-atlas="assets/reef/reef-atlas.webp" aria-hidden="true"></canvas>
 
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="/">
-        <img src="./BioCraftedEd_files/68247b191ba1dd89a4204896_biocraftedlogo.png" width="36" height="36" alt="">
-        <span>BioCraft<em>Ed</em></span>
-      </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="https://lab.biocrafted.xyz/">Lab</a>
-        <a href="https://games.biocrafted.xyz/">Games</a>
-        <a href="#jams">Jams</a>
-        <a href="#contact">Contact</a>
-        <a class="nav-cta" href="https://lab.biocrafted.xyz/">Enter the Lab</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="hero wrap">
-      <div class="kicker">London · bioscience · games</div>
-      <h1>One studio. Two doors.</h1>
-      <p class="lede">
-        BioCraftEd is a London-based bioscientist and game-dev studio.
-        We build a real molecular-biology lab in the browser for schools,
-        and we ship games — some about biology, many simply for play —
-        plus open game jams anyone can join.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-lab" href="https://lab.biocrafted.xyz/">Open Lab ▸</a>
-        <a class="btn btn-games" href="https://games.biocrafted.xyz/">Open Games ▸</a>
-        <a class="btn btn-ghost" href="https://luma.com/ll7at9k0">Game Jam #2</a>
-      </div>
-    </section>
-
-    <section class="wrap doors" aria-label="BioCraftEd destinations">
-      <a class="door door-lab" href="https://lab.biocrafted.xyz/">
-        <div class="door-tag">lab.biocrafted.xyz</div>
-        <h2>BioCraftEd Lab</h2>
-        <p>
-          A molecular biology lab in the browser for high schools —
-          no kit, no consumables, real skills.
-        </p>
-        <ul>
-          <li><strong>Gene Hunter</strong> — fluency in qPCR and gel electrophoresis</li>
-          <li>Teacher demo, marking tools, and school licences</li>
-          <li>Curiosity tools, biosecurity, and a VR lab in development</li>
-        </ul>
-        <span class="door-go">Enter the Lab ▸</span>
-      </a>
-
-      <a class="door door-games" href="https://games.biocrafted.xyz/">
-        <div class="door-tag">games.biocrafted.xyz</div>
-        <h2>BioCraftEd Studios</h2>
-        <p>
-          Studio games, experimental builds, VR titles, and community
-          jam entries we host — not every game is educational, and that is intentional.
-        </p>
-        <ul>
-          <li>Featured studio games and prototypes you can play in-browser</li>
-          <li>Game jams with phone + desktop web rules</li>
-          <li>Feedback that credits playtesters in finished games</li>
-        </ul>
-        <span class="door-go">Browse the games ▸</span>
-      </a>
-    </section>
-
-    <section class="wrap" id="gene-hunter" aria-labelledby="gh-title">
-      <div class="section-head">
-        <div>
-          <h2 id="gh-title">Gene Hunter</h2>
-          <p>
-            The Lab’s core course: six assignments and a final project that walk
-            pupils around the same loop a field researcher uses — sample, experiment, discover.
-          </p>
+  <div class="wrap" id="main">
+    <header class="site-header">
+      <div class="bevel">
+        <img class="logo" src="./assets/bcd-logo-45px-native.png" width="56" height="56" alt="BioCraftEd">
+        <div class="brand-copy">
+          <h1>BioCraftEd</h1>
+          <p class="tag">London · bioscience lab in the browser · games studio &amp; jams</p>
         </div>
-        <a class="btn btn-lab" href="https://lab.biocrafted.xyz/">Try the teacher demo</a>
+        <div class="header-actions">
+          <a class="btn play" href="https://lab.biocrafted.xyz/">Open Lab</a>
+          <a class="btn dl" href="https://games.biocrafted.xyz/">Open Games</a>
+        </div>
       </div>
-      <div class="cards">
-        <article class="card">
-          <h3>Detect with qPCR</h3>
-          <p>Is the gene there, and how much of it? Pupils read real-time curves, Ct and fold change.</p>
-        </article>
-        <article class="card">
-          <h3>Verify on a gel</h3>
-          <p>Confirm the product is the right size — the same check cloning, sequencing and editing still rely on.</p>
-        </article>
-        <article class="card">
-          <h3>Built for schools</h3>
-          <p>Ages 14–18, aligned to A-level DNA technology content. One annual licence; start with a free term. Details on the <a href="https://lab.biocrafted.xyz/#pricing">Lab pricing page</a>.</p>
-        </article>
-      </div>
-    </section>
+    </header>
 
-    <section class="wrap" id="jams" aria-labelledby="jam-title">
-      <div class="jam">
-        <div>
-          <div class="jam-tag">Game jams</div>
-          <h2 id="jam-title">Join Game Jam #2</h2>
-          <p>
-            Saturday 21 November 2026, 12:00–20:00 London.
-            Web games only; must work on phone and desktop.
-            One keyword, revealed at the start. Jam #1 entries stay owned by their authors and are hosted on the games site.
-          </p>
-          <div class="hero-actions" style="margin-top:1.1rem">
-            <a class="btn btn-ghost" href="https://luma.com/ll7at9k0">Event page on Luma</a>
-            <a class="btn btn-games" href="https://games.biocrafted.xyz/">See jam entries ▸</a>
+    <div class="marquee-wrap" aria-label="News">
+      <div class="marquee">
+        ★ Portal into <a href="https://lab.biocrafted.xyz/">lab.biocrafted.xyz</a> and <a href="https://games.biocrafted.xyz/">games.biocrafted.xyz</a>
+        ★ Gene Hunter: qPCR + gels for schools
+        ★ Game Jam #2 · Sat 21 Nov 2026 · web · phone + desktop · <a href="https://luma.com/ll7at9k0">Luma</a>
+        ★ Background: Coral Reef by Luke (BioCraftEd) — same living reef as the games hub ★
+      </div>
+    </div>
+
+    <section class="doors" aria-label="Lab and Games">
+      <article class="win">
+        <div class="wtitle lab"><span class="ti"><img src="./BioCraftedEd_files/68247b191ba1dd89a4204896_biocraftedlogo.png" width="16" height="16" alt=""> lab.biocrafted.xyz</span></div>
+        <div class="wbody">
+          <h2>BioCraftEd Lab</h2>
+          <p>A real molecular-biology lab in the browser for high schools — no kit, no consumables.</p>
+          <ul>
+            <li><strong>Gene Hunter</strong> — fluency in qPCR and gel electrophoresis</li>
+            <li>Teacher demo, marking tools, school licences</li>
+            <li>Curiosity tools, biosecurity, VR lab in development</li>
+          </ul>
+          <div class="wactions">
+            <a class="btn play" href="https://lab.biocrafted.xyz/">▶ Enter the Lab</a>
+            <a class="btn plain" href="https://lab.biocrafted.xyz/#pricing">Pricing</a>
           </div>
         </div>
-        <div class="jam-meta" aria-label="Jam details">
-          <div><strong>When</strong><br>Sat 21 Nov 2026 · 12:00–20:00 Europe/London</div>
-          <div><strong>Format</strong><br>Web · phone + desktop</div>
-          <div><strong>Where to play</strong><br><a href="https://games.biocrafted.xyz/" style="color:var(--games);font-weight:700;text-decoration:none">games.biocrafted.xyz</a></div>
+      </article>
+
+      <article class="win">
+        <div class="wtitle"><span class="ti"><img src="./assets/bcd-logo-45px-native.png" width="16" height="16" alt=""> games.biocrafted.xyz</span></div>
+        <div class="wbody">
+          <h2>BioCraftEd Studios</h2>
+          <p>Studio games, prototypes, VR titles, and community jam entries we host. Not every game is educational — that is intentional.</p>
+          <ul>
+            <li>Featured studio games and experimental builds</li>
+            <li>Game jams (web · phone + desktop)</li>
+            <li>Feedback that credits playtesters</li>
+          </ul>
+          <div class="wactions">
+            <a class="btn dl" href="https://games.biocrafted.xyz/">▶ Browse games</a>
+            <a class="btn luma" href="https://luma.com/ll7at9k0">Jam #2</a>
+          </div>
         </div>
+      </article>
+    </section>
+
+    <p class="sec"><span>Gene Hunter</span></p>
+    <section class="cards" aria-labelledby="gh-h">
+      <h2 id="gh-h" class="visually-hidden" style="position:absolute;left:-9999px">Gene Hunter</h2>
+      <article class="card">
+        <h3>Detect · qPCR</h3>
+        <p>Is the gene there, and how much? Pupils read real-time curves, Ct and fold change.</p>
+      </article>
+      <article class="card">
+        <h3>Verify · gel</h3>
+        <p>Confirm the product is the right size — the check cloning, sequencing and editing still use.</p>
+      </article>
+      <article class="card">
+        <h3>For schools</h3>
+        <p>Ages 14–18, A-level DNA tech. Free trial term. Details on the <a href="https://lab.biocrafted.xyz/">Lab site</a>.</p>
+      </article>
+    </section>
+
+    <section class="jam-panel" id="jams" aria-labelledby="jam-h">
+      <h2 id="jam-h">Game Jam #2</h2>
+      <p>Saturday 21 November 2026, 12:00–20:00 London. Web games only; must work on phone and desktop. One keyword at the start. Jam #1 entries stay owned by their authors on the games hub.</p>
+      <div class="jam-meta">
+        <div><strong>When:</strong> Sat 21 Nov 2026 · 12:00–20:00 Europe/London</div>
+        <div><strong>Format:</strong> Web · phone + desktop</div>
+        <div><strong>Play / entries:</strong> <a href="https://games.biocrafted.xyz/">games.biocrafted.xyz</a></div>
+      </div>
+      <div class="wactions">
+        <a class="btn luma" href="https://luma.com/ll7at9k0">Event on Luma</a>
+        <a class="btn dl" href="https://games.biocrafted.xyz/">See jam entries</a>
       </div>
     </section>
 
-    <section class="wrap about" id="contact" aria-label="About and contact">
-      <div class="panel">
-        <h2>About BioCraftEd</h2>
-        <p>
-          We make synthetic biology more accessible by pairing real lab skills
-          with games — gamification in the Lab, and a separate studio/community
-          games programme that is not limited to education.
-        </p>
-        <p>
-          The Lab and the Games hub are the live products. This homepage is the
-          portal between them.
-        </p>
-        <p>
-          Prefer chat? We’re on
-          <a href="https://discord.gg/YZ4kR3VDPy" style="color:var(--mint);font-weight:700;text-decoration:none">Discord</a>.
-        </p>
-      </div>
-      <div class="panel">
-        <h2>Contact</h2>
-        <ul class="contact-list">
-          <li>
-            <a href="mailto:lab@biocrafted.xyz">lab@biocrafted.xyz</a>
-            <span>Lab, schools, and general BioCraftEd</span>
-          </li>
-          <li>
-            <a href="https://lab.biocrafted.xyz/#contact">School enquiry form</a>
-            <span>Quotes, trials, calls, VR pilots</span>
-          </li>
-          <li>
-            <span style="color:var(--text);font-weight:600">By post</span>
-            <span>BioCraftEd · 66 Lavender Hill · London · SW11 5RQ</span>
-          </li>
-        </ul>
-      </div>
+    <section class="about bevel" id="contact">
+      <h2>About &amp; contact</h2>
+      <p>BioCraftEd makes synthetic biology more accessible by pairing real lab skills with games — gamification in the Lab, and a separate studio / community games programme that is not limited to education.</p>
+      <p>Prefer chat? <a href="https://discord.gg/YZ4kR3VDPy">Discord</a>.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:lab@biocrafted.xyz">lab@biocrafted.xyz</a><span>Lab, schools, general BioCraftEd</span></li>
+        <li><a href="https://lab.biocrafted.xyz/#contact">School enquiry form</a><span>Quotes, trials, calls, VR pilots</span></li>
+        <li><strong>By post</strong><span>BioCraftEd · 66 Lavender Hill · London · SW11 5RQ</span></li>
+      </ul>
     </section>
-  </main>
 
-  <footer>
-    <div class="wrap">
-      <div class="foot">
-        <p>
-          © 2026 BioCraftEd · London.
-          Portal for <a href="https://lab.biocrafted.xyz/" style="color:var(--mint);text-decoration:none">Lab</a>
-          and <a href="https://games.biocrafted.xyz/" style="color:var(--games);text-decoration:none">Games</a>.
-        </p>
-        <div class="socials" aria-label="Social links">
-          <a href="https://x.com/Mark1wan" rel="noopener">X</a>
-          <a href="https://www.youtube.com/@BioCraftEd" rel="noopener">YouTube</a>
-          <a href="https://www.linkedin.com/in/marko-obrvan-496781138/" rel="noopener">LinkedIn</a>
-          <a href="https://biomeunknown.substack.com/" rel="noopener">Substack</a>
-          <a href="https://discord.gg/YZ4kR3VDPy" rel="noopener">Discord</a>
-        </div>
+    <div class="foot">
+      <p>© 2026 BioCraftEd · London. Background: Coral Reef by Luke (BioCraftEd), same living wallpaper as <a href="https://games.biocrafted.xyz/">games.biocrafted.xyz</a>.</p>
+      <div class="socials" aria-label="Social links">
+        <a href="https://x.com/Mark1wan">X</a>
+        <a href="https://www.youtube.com/@BioCraftEd">YouTube</a>
+        <a href="https://www.linkedin.com/in/marko-obrvan-496781138/">LinkedIn</a>
+        <a href="https://biomeunknown.substack.com/">Substack</a>
+        <a href="https://discord.gg/YZ4kR3VDPy">Discord</a>
       </div>
       <div class="legal">
         <a href="https://lab.biocrafted.xyz/privacy">Privacy</a>
@@ -668,6 +138,19 @@
         <a href="./legacy/webflow-2025.html">Previous homepage</a>
       </div>
     </div>
-  </footer>
+  </div>
+
+  <div id="taskbar" role="navigation" aria-label="Quick links">
+    <div id="start" title="BioCraftEd"><span class="hx">◆</span> BioCraftEd</div>
+    <div class="tb">
+      <a class="lab" href="https://lab.biocrafted.xyz/">Lab</a>
+      <a class="games" href="https://games.biocrafted.xyz/">Games</a>
+      <a class="jam" href="#jams">Jam #2</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div id="tray" aria-hidden="true">portal</div>
+  </div>
+
+  <script src="./assets/reef/reef.js" defer></script>
 </body>
 </html>
