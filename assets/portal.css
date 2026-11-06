@@ -95,15 +95,24 @@ a:focus-visible,.btn:focus-visible,.tb a:focus-visible,.door:focus-visible{
 .hero{
   text-align:center;
   padding:18px 16px 20px;
-  background:linear-gradient(180deg,var(--lt),var(--cream) 50%,var(--sand));
   margin-bottom:12px;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+.hero.bevel{
+  /* keep class for markup; force no chrome so reef shows through */
+  background:transparent;
+  border:none;
+  box-shadow:none;
 }
 .hero .logo{
   image-rendering:pixelated;
-  width:min(120px,34vw);height:auto;
+  image-rendering:crisp-edges;
+  width:min(140px,38vw);height:auto;
   margin:0 auto 14px;
-  border:3px solid var(--ink);
-  background:#1a1210;
+  border:0;
+  background:transparent;
   display:block;
 }
 .hero h1{
